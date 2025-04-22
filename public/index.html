@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asistente IA PMS</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+      textarea {
+        width: 100%;
+        height: 100px;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+      }
+      button {
+        padding: 0.6rem 1.2rem;
+        background: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      pre {
+        background: #eee;
+        padding: 1rem;
+        white-space: pre-wrap;
+      }
+      .alerta {
+        display: none;
+        background: #ffe6e6;
+        padding: 1rem;
+        border-left: 5px solid red;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🧠 Asistente IA del Hotel</h2>
+    <p>Escribe el mensaje de un cliente:</p>
+    <textarea
+      id="mensaje"
+      placeholder="Ej: Quiero cancelar mi reserva para el sábado"
+    ></textarea>
+    <button onclick="analizar()">Analizar intención</button>
+
+    <pre id="respuesta">Esperando análisis...</pre>
+    <div id="alerta" class="alerta"></div>
+
+    <script>
+      async function analizar() {
+        const mensaje = document.getElementById("mensaje").value;
+        const respuesta = document.getElementById("respuesta");
+        const alerta = document.getElementById("alerta");
+
+        const res = await fetch("/analizar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mensaje }),
+        });
+
+        const data = await res.json();
+
+        respuesta.textContent = `🧠 Intención: ${data.intencion_detectada}\n📈 Confianza: ${data.confianza}\n💬 Sugerencia: ${data.sugerencia}`;
+
+        if (data.necesita_recepcionista) {
+          alerta.style.display = "block";
+          alerta.textContent =
+            "⚠️ El asistente no ha entendido completamente tu mensaje. Se recomienda reformularlo o contactar con recepción.";
+        } else {
+          alerta.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

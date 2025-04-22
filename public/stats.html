@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Estadísticas del Asistente IA</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📊 Estadísticas del Asistente IA</h2>
+    <div id="total"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Intención</th>
+          <th>Ocurrencias</th>
+        </tr>
+      </thead>
+      <tbody id="tabla"></tbody>
+    </table>
+    <script>
+      async function cargar() {
+        const res = await fetch("/stats");
+        const data = await res.json();
+        document.getElementById("total").innerHTML =
+          `<p>Total: ${data.total}</p>`;
+        const tabla = document.getElementById("tabla");
+        tabla.innerHTML = "";
+        for (let key in data.stats) {
+          tabla.innerHTML += `<tr><td>${key}</td><td>${data.stats[key]}</td></tr>`;
+        }
+      }
+      cargar();
+    </script>
+  </body>
+</html>

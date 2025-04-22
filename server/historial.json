@@ -1,0 +1,10 @@
+[
+  {
+    "fecha": "2025-04-22T16:04:40.655Z",
+    "mensaje_original": "quiero cancelar mi reserva",
+    "intencion_detectada": "cancelacion",
+    "confianza": "0.06",
+    "sugerencia": "Parece que no entendí bien tu mensaje. ¿Podrías reformularlo o hablar con recepción?",
+    "necesita_recepcionista": true
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "reserva": [
+    "quiero reservar una habitación",
+    "me gustaría hacer una reserva",
+    "hay disponibilidad para esta noche"
+  ],
+  "cancelacion": [
+    "quiero cancelar mi reserva",
+    "necesito anular mi habitación",
+    "puedo cancelar?"
+  ],
+  "precio": ["cuánto cuesta", "precio por noche", "tarifas del hotel"]
+}
