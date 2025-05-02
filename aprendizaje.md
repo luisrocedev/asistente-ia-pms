@@ -1,324 +1,234 @@
-# Informe Técnico del Proyecto
+---
+marp: true
+theme: gaia
+paginate: true
+---
 
-## Programación
+# 🗂️ Aprendizaje sobre el Proyecto Asistente-IA-PMS
 
-### ¿Qué elementos fundamentales incluye vuestro código (variables, constantes, operadores, tipos de datos)?
+---
 
-El código utiliza variables (`let`), constantes (`const`), operadores aritméticos y lógicos, y tipos de datos como cadenas (`string`), números, arrays y objetos.
+# Programación
 
-**Ejemplo real:**
-
-```javascript
-const mensaje = "quiero reservar una habitación"; // string
-let confianza = 0.85; // número
-const intenciones = ["reserva", "cancelación"]; // array
-const resultado = { intencion: "reserva", confianza: 0.85 }; // objeto
+## 1. Elementos fundamentales del código
+- Uso de variables y constantes en JavaScript (Node.js y frontend).
+- Tipos: string, number, boolean, array, objeto.
+- Ejemplo:
+```js
+const fs = require('fs');
+let historial = [];
 ```
 
 ---
 
-### ¿Qué estructuras de control habéis usado y por qué (selección, repetición, saltos)?
-
-Se usan condicionales (`if`, `else`) para tomar decisiones y bucles (`for`, `forEach`, `reduce`) para recorrer listas y procesar datos.
-
-**Ejemplo real:**
-
-```javascript
-if (confianza > 0.7) {
-  console.log("Intención detectada");
-} else {
-  console.log("No se detectó intención");
-}
-
-for (let i = 0; i < intenciones.length; i++) {
-  console.log(intenciones[i]);
-}
-```
-
-En el código también se usa `reduce` para encontrar la mejor clasificación:
-
-```javascript
-const mejor = clasificaciones.reduce((a, b) => (a.value > b.value ? a : b));
-```
-
----
-
-### ¿Habéis implementado control de excepciones? ¿Cómo gestionáis errores?
-
-Sí, se usan bloques `try...catch` para manejar errores al leer o escribir archivos, y comprobaciones con `if` para validar datos.
-
-**Ejemplo real:**
-
-```javascript
-try {
-  const datos = fs.readFileSync("entrenamiento.json");
-} catch (error) {
-  console.error("Error al leer el archivo:", error);
-}
-```
-
-Y comprobación de datos:
-
-```javascript
-if (!mensaje) return res.status(400).json({ error: "Mensaje vacío" });
-```
-
----
-
-### ¿Habéis documentado el código mediante comentarios o docstrings?
-
-Sí, hay comentarios explicativos en funciones y partes importantes del código.
-
-**Ejemplo real:**
-
-```javascript
-// Esta función analiza el mensaje y devuelve la intención detectada
-function detectarIntencion(texto = "") {
-  // ...código...
+## 2. Estructuras de control
+- Condicionales: if, else, switch.
+- Bucles: for, forEach.
+- Ejemplo:
+```js
+for (let mensaje of historial) {
+  // ...
 }
 ```
 
 ---
 
-### ¿Qué paradigma habéis aplicado (estructurada, orientada a objetos)? ¿Por qué lo habéis elegido?
-
-Se usa programación estructurada y modular, con funciones y módulos, porque el proyecto es sencillo y así es más fácil de mantener.
-
----
-
-### ¿Qué clases y objetos principales forman vuestro proyecto? ¿Cómo se relacionan entre sí?
-
-No se usan clases, pero sí objetos para almacenar resultados, frases de entrenamiento e historial de conversaciones.  
-Por ejemplo, el objeto resultado:
-
-```javascript
-const resultado = {
-  fecha: new Date().toISOString(),
-  mensaje_original: texto,
-  intencion_detectada: label,
-  confianza,
-  sugerencia: necesitaRecep ? "..." : RESPUESTAS[label],
-  necesita_recepcionista: necesitaRecep,
-};
-```
+## 3. Control de excepciones y gestión de errores
+- Uso de try-catch en Node.js para manejar errores de archivos y lógica.
 
 ---
 
-### ¿Habéis usado conceptos avanzados como herencia, polimorfismo o interfaces? Explicad su aplicación.
-
-No, el proyecto no requiere herencia ni polimorfismo. Se usan funciones y objetos simples.
-
----
-
-### ¿Habéis gestionado la información mediante archivos? ¿Usáis ficheros o interfaces gráficas para la interacción del usuario?
-
-Sí, se usan archivos JSON (`entrenamiento.json`, `historial.json`) para guardar datos.  
-La interacción con el usuario es mediante una interfaz web (`index.html`).
-
-**Ejemplo real de lectura/escritura:**
-
-```javascript
-let data = JSON.parse(fs.readFileSync(TRAIN_PATH));
-fs.writeFileSync(HIST_PATH, JSON.stringify(hist.slice(0, 100), null, 2));
-```
+## 4. Documentación del código
+- Comentarios en JS y archivos markdown (README, aprendizaje, guion).
 
 ---
 
-### ¿Qué estructuras de datos estáis utilizando (listas, matrices, colecciones)? ¿Por qué?
-
-Se usan arrays y objetos porque son fáciles de manejar en JavaScript y permiten organizar frases, intenciones e historial.
+## 5. Paradigma aplicado
+- Programación modular y estructurada.
+- Separación de lógica en archivos: ia.js (lógica IA), index.js (servidor), public/ (frontend).
 
 ---
 
-### ¿Habéis aplicado técnicas avanzadas como expresiones regulares o flujos de entrada/salida?
+## 6. Clases y objetos principales
+- Objetos: mensaje, usuario, historial.
+- Uso de funciones y objetos para organizar la lógica.
 
-Sí, se usan expresiones regulares para buscar palabras clave y flujos de entrada/salida para leer y escribir archivos JSON.
+---
 
-**Ejemplo real:**
+## 7. Conceptos avanzados
+- Procesamiento de lenguaje natural (NLP) para la IA.
+- Gestión de datos en archivos JSON.
+- Modularidad y reutilización de funciones.
 
-```javascript
-if (/reservar/.test(mensaje)) {
-  // El mensaje contiene la palabra "reservar"
+---
+
+## 8. Gestión de información y archivos
+- Uso de archivos JSON para almacenar historial y entrenamiento.
+- Posibilidad de ampliar con base de datos.
+
+---
+
+## 9. Estructuras de datos utilizadas
+- Arrays y objetos para mensajes, usuarios e historial.
+
+---
+
+## 10. Técnicas avanzadas
+- Integración de modelos de IA para respuestas automáticas.
+- Comunicación entre frontend y backend vía HTTP.
+
+---
+
+# Sistemas Informáticos
+
+## 1. Características del hardware
+- Desarrollo y pruebas en MacBook (macOS), compatible con cualquier sistema con Node.js.
+
+---
+
+## 2. Sistema operativo
+- Multiplataforma: macOS, Linux, Windows.
+
+---
+
+## 3. Configuración de redes
+- Acceso por HTTP en red local.
+
+---
+
+## 4. Copias de seguridad
+- Uso de Git para control de versiones y backups manuales de archivos JSON.
+
+---
+
+## 5. Integridad y seguridad de datos
+- Validación de entradas y gestión de sesiones si es necesario.
+
+---
+
+## 6. Usuarios, permisos y accesos
+- Gestión básica de usuarios en el historial.
+
+---
+
+## 7. Documentación técnica
+- Archivos markdown y comentarios en el código.
+
+---
+
+# Entornos de Desarrollo
+
+## 1. Entorno de desarrollo (IDE)
+- Visual Studio Code con extensiones para JS y Node.js.
+
+---
+
+## 2. Automatización de tareas
+- Scripts npm para iniciar el servidor y tareas de desarrollo.
+
+---
+
+## 3. Control de versiones
+- Git y GitHub.
+
+---
+
+## 4. Refactorización
+- Mejoras periódicas en la estructura y modularidad del código.
+
+---
+
+## 5. Documentación técnica
+- README.md, aprendizaje.md, guion.md.
+
+---
+
+## 6. Diagramas
+- Opcional: diagramas de flujo para la arquitectura del asistente.
+
+---
+
+# Bases de Datos
+
+## 1. Sistema gestor
+- No se usa base de datos, se emplean archivos JSON.
+
+---
+
+## 2. Modelo entidad-relación
+- No aplica actualmente.
+
+---
+
+## 3. Funcionalidades avanzadas
+- Posibilidad de integración futura con bases de datos.
+
+---
+
+## 4. Protección y recuperación de datos
+- Backups manuales de archivos JSON y control de versiones en Git.
+
+---
+
+# Lenguajes de Marcas y Gestión de Información
+
+## 1. Estructura de HTML
+- Uso de etiquetas semánticas en public/index.html.
+
+---
+
+## 2. Tecnologías frontend
+- HTML, CSS, JavaScript.
+
+---
+
+## 3. Interacción con el DOM
+- JS para mostrar mensajes y respuestas de la IA.
+
+---
+
+## 4. Validación de HTML y CSS
+- Validadores online y extensiones del IDE.
+
+---
+
+## 5. Conversión de datos (XML, JSON)
+- Uso de JSON para mensajes, historial y entrenamiento.
+
+---
+
+## 6. Integración con sistemas de gestión
+- Posibilidad de integración futura mediante APIs.
+
+---
+
+# Proyecto Intermodular
+
+## 1. Objetivo del software
+- Facilitar la gestión hotelera mediante un asistente inteligente.
+
+---
+
+## 2. Necesidad o problema que soluciona
+- Automatiza respuestas y ayuda en tareas administrativas.
+
+---
+
+## 3. Stack de tecnologías
+- Node.js, JavaScript, HTML, CSS, modelos de IA.
+
+---
+
+## 4. Desarrollo por módulos
+- Módulo de interfaz, servidor, IA y utilidades.
+
+---
+
+<style>
+section code, section pre {
+  font-size: 0.8em;
 }
-```
-
-Y para entrada/salida:
-
-```javascript
-fs.readFileSync("entrenamiento.json");
-fs.writeFileSync("historial.json", datos);
-```
-
----
-
-## Sistemas Informáticos
-
-### ¿Qué características tiene el hardware donde se ejecuta vuestro desarrollo?
-
-Desarrollamos en un Mac con procesador Intel/Apple Silicon, 8GB de RAM mínimo. En producción, puede ejecutarse en cualquier servidor compatible con Node.js.
-
----
-
-### ¿Qué sistema operativo habéis seleccionado para vuestro entorno de desarrollo y producción? ¿Por qué?
-
-Usamos macOS en desarrollo por comodidad y Linux en producción por estabilidad y compatibilidad con Node.js.
-
----
-
-### ¿Cómo habéis configurado las redes para vuestro proyecto?
-
-El servidor Express escucha en un puerto local (por ejemplo, 3000) y responde a peticiones HTTP. No se ha configurado seguridad avanzada, pero se recomienda usar HTTPS en producción.
-
----
-
-### ¿Habéis implementado sistemas de copias de seguridad? ¿Cuál es vuestra estrategia?
-
-Actualmente no, pero se recomienda hacer copias periódicas de los archivos JSON.
-
----
-
-### ¿Qué medidas habéis tomado para asegurar la integridad y seguridad de vuestros datos?
-
-Se recomienda restringir el acceso a los archivos JSON y usar HTTPS para proteger la comunicación.
-
----
-
-### ¿Cómo habéis configurado usuarios, permisos y accesos en el sistema operativo?
-
-No se ha configurado gestión de usuarios específica, pero se recomienda ejecutar el servidor con permisos limitados.
-
----
-
-### ¿Habéis documentado la configuración técnica y la gestión del sistema informático?
-
-La configuración básica está documentada en el README.md.
-
----
-
-## Entornos de Desarrollo
-
-### ¿Qué entorno de desarrollo (IDE) estáis utilizando y cómo lo habéis configurado?
-
-Usamos Visual Studio Code, con extensiones para JavaScript y Node.js.
-
----
-
-### ¿Cómo automatizáis tareas en vuestro entorno de desarrollo?
-
-Podemos usar scripts de npm para ejecutar el servidor y automatizar tareas.
-
----
-
-### ¿Utilizáis control de versiones? ¿Qué plataforma? ¿Cómo gestionáis versiones y ramas?
-
-Sí, usamos Git y GitHub. Trabajamos en la rama principal y creamos ramas para nuevas funcionalidades.
-
----
-
-### ¿Qué estrategia seguís para refactorizar vuestro código?
-
-Revisamos el código periódicamente y extraemos funciones o módulos cuando es necesario.
-
----
-
-### ¿Cómo documentáis técnicamente el proyecto?
-
-Usamos archivos Markdown (`README.md`) y comentarios en el código.
-
----
-
-### ¿Habéis creado diagramas de clases o diagramas de comportamiento?
-
-No, pero se recomienda hacer diagramas para proyectos más grandes.
-
----
-
-## Bases de Datos
-
-### ¿Qué sistema gestor de bases de datos habéis seleccionado? ¿Por qué?
-
-Usamos archivos JSON como base de datos no relacional, porque es sencillo y suficiente para este proyecto.
-
----
-
-### ¿Cómo habéis diseñado el modelo entidad-relación?
-
-No usamos modelo entidad-relación formal, pero los archivos JSON estructuran los datos por intención y por historial.
-
----
-
-### ¿Usáis vistas, procedimientos almacenados, disparadores o funciones avanzadas?
-
-No, porque no usamos un SGBD tradicional.
-
----
-
-### ¿Implementáis mecanismos específicos para proteger y recuperar datos?
-
-No, pero se recomienda hacer copias de seguridad de los archivos JSON.
-
----
-
-## Lenguajes de Marcas y Sistemas de Gestión de Información
-
-### ¿Cómo habéis estructurado vuestros documentos HTML? ¿Aplicáis buenas prácticas y estándares web?
-
-Sí, usamos etiquetas semánticas y estructura clara en los archivos HTML.
-
----
-
-### ¿Qué tecnologías utilizáis para el frontend (CSS, JavaScript)? ¿Por qué esas tecnologías?
-
-Usamos HTML, CSS y JavaScript porque son estándar para aplicaciones web.
-
----
-
-### ¿Utilizáis JavaScript para interactuar con el DOM?
-
-Sí, para mostrar resultados y estadísticas en la interfaz web.
-
----
-
-### ¿Habéis validado vuestros documentos HTML y CSS?
-
-No de forma automática, pero seguimos buenas prácticas.
-
----
-
-### ¿Habéis implementado la conversión de datos entre formatos (XML, JSON)? ¿Por qué?
-
-Usamos JSON para almacenar y transferir datos porque es fácil de usar en JavaScript.
-
----
-
-### ¿Vuestra aplicación interactúa con sistemas de gestión empresarial o herramientas específicas?
-
-Sí, está pensada para integrarse en un PMS (Personal Management System), por lo que es una aplicación de gestión empresarial.
-
----
-
-## Proyecto intermodular
-
-### ¿Qué objetivo cumple vuestro software?
-
-Automatizar la detección de intenciones en mensajes de clientes de hotel.
-
----
-
-### ¿Qué necesidad cubre o qué problema soluciona?
-
-Agiliza la atención al cliente y automatiza respuestas frecuentes en hoteles.
-
----
-
-### ¿Cuál es el stack de tecnologías que habéis elegido y por qué?
-
-Node.js, Express, natural (NLP), HTML, CSS, JavaScript y JSON, porque son tecnologías modernas, sencillas y bien documentadas.
-
----
-
-### ¿Cómo habéis planteado el desarrollo por versiones?
-
-Primero una versión mínima funcional (detectar intenciones), y después se añadirán mejoras como panel gráfico, detección de tono, exportación de historial, integración real, multiusuario y dashboard.
-
----
+.small-code code, .small-code pre {
+  font-size: 0.7em;
+}
+</style>
