@@ -2,68 +2,69 @@ const natural = require("natural");
 const fs = require("fs");
 const path = require("path");
 
-const classifier = new natural.BayesClassifier();
-const TRAIN_PATH = path.join(__dirname, "entrenamiento.json");
-const HIST_PATH = path.join(__dirname, "historial.json");
-const MIN_CONF = 0.3;
-
-let data = JSON.parse(fs.readFileSync(TRAIN_PATH));
-for (const etiqueta in data) {
-  data[etiqueta].forEach((frase) => classifier.addDocument(frase, etiqueta));
+// Cargamos FAQs definidas por el usuario
+const FAQ_PATH = path.join(__dirname, "faq.json");
+let faq = [];
+try {
+  faq = JSON.parse(fs.readFileSync(FAQ_PATH, 'utf-8'));
+} catch (err) {
+  console.error('Error leyendo faq.json:', err);
 }
-classifier.train();
 
-const RESPUESTAS = {
-  reserva: "¿Quieres reservar? Indícame fechas y número de huéspedes.",
-  cancelacion: "¿Deseas cancelar? Puedo ayudarte.",
+const TRAIN_PATH = path.join(__dirname, "entrenamiento.json");
+let entrenamiento = {};
+try {
+  entrenamiento = JSON.parse(fs.readFileSync(TRAIN_PATH, 'utf-8'));
+} catch (err) {
+  console.error('Error leyendo entrenamiento.json:', err);
+}
+
+// Respuestas por defecto para las intenciones de entrenamiento
+const RESPUESTAS_POR_DEFECTO = {
+  reserva: "Para reservar, indícame fechas y número de huéspedes.",
+  cancelacion: "Para cancelar, por favor dime tu número de reserva.",
   precio: "Dime qué tipo de habitación y fechas para darte el precio.",
 };
 
-function detectarIntencion(texto = "") {
-  texto = texto.trim();
-  if (!texto) return _respuestaBasica(texto);
+// Añadir cada frase de entrenamiento a la lista de FAQs con su respuesta por defecto
+Object.entries(entrenamiento).forEach(([etiqueta, frases]) => {
+  frases.forEach(frase => {
+    faq.push({ question: frase, answer: RESPUESTAS_POR_DEFECTO[etiqueta] || 'Lo siento, no tengo esa información.' });
+  });
+});
 
-  const clasificaciones = classifier.getClassifications(texto.toLowerCase());
-  const mejor = clasificaciones.reduce((a, b) => (a.value > b.value ? a : b));
-  const confianza = parseFloat(mejor.value).toFixed(2);
-  const label = mejor.label;
-
-  const necesitaRecep =
-    confianza < MIN_CONF || label === "inapropiado" || !RESPUESTAS[label];
-
-  const resultado = {
-    fecha: new Date().toISOString(),
-    mensaje_original: texto,
-    intencion_detectada: label,
-    confianza,
-    sugerencia: necesitaRecep
-      ? "Parece que no entendí bien tu mensaje. ¿Podrías reformularlo o hablar con recepción?"
-      : RESPUESTAS[label],
-    necesita_recepcionista: necesitaRecep,
-  };
-
-  _guardarHistorial(resultado);
-  return resultado;
-}
-
-function _respuestaBasica(texto) {
-  return {
-    fecha: new Date().toISOString(),
-    mensaje_original: texto,
-    intencion_detectada: "desconocido",
-    confianza: 0,
-    sugerencia: "No entendí tu mensaje. ¿Quieres hablar con recepción?",
-    necesita_recepcionista: true,
-  };
-}
-
-function _guardarHistorial(entry) {
-  let hist = [];
-  if (fs.existsSync(HIST_PATH)) {
-    hist = JSON.parse(fs.readFileSync(HIST_PATH));
+/**
+ * Calcula la respuesta más apropiada en base a las FAQs.
+ * Usa Jaro-Winkler para medir similaridad entre pregunta del usuario y FAQs.
+ */
+function responderPregunta(texto = "") {
+  texto = texto.trim().toLowerCase();
+  // Detectar saludos y responder bienvenida
+  const saludos = ['hola', 'buenos días', 'buenas tardes', 'buenas noches'];
+  if (saludos.includes(texto)) {
+    const suggestions = faq.slice(0, 3).map(item => item.question);
+    return { answer: '¡Hola! Soy tu asistente del Hotel 4 Estrellas. ¿En qué puedo ayudarte hoy?', suggestions };
   }
-  hist.unshift(entry);
-  fs.writeFileSync(HIST_PATH, JSON.stringify(hist.slice(0, 100), null, 2));
+  if (!texto) return { answer: 'Por favor escribe tu pregunta.', suggestions: [] };
+  // Calcular puntuaciones para cada FAQ
+  const resultados = faq.map(item => ({
+    question: item.question,
+    answer: item.answer,
+    score: natural.JaroWinklerDistance(texto, item.question.toLowerCase())
+  }));
+  // Ordenar por puntuación descendente
+  resultados.sort((a, b) => b.score - a.score);
+  const mejor = resultados[0];
+  // Preparar sugerencias con las siguientes preguntas más parecidas
+  const suggestions = resultados.slice(1, 4).map(r => r.question);
+  // Determinar respuesta o fallback
+  if (mejor.score > 0.7) {
+    return { answer: mejor.answer, suggestions };
+  } else {
+    return { answer: 'Lo siento, no tengo esa información. Por favor contacta con recepción.', suggestions };
+  }
 }
 
-module.exports = { detectarIntencion };
+// Opcional: podrías conservar un historial de preguntas/respuestas en historial.json si lo deseas
+
+module.exports = { responderPregunta };

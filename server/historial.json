@@ -1,5 +1,21 @@
 [
   {
+    "fecha": "2025-05-03T13:50:58.067Z",
+    "mensaje_original": "Quiero hacer una reserva",
+    "intencion_detectada": "reserva",
+    "confianza": "0.04",
+    "sugerencia": "Parece que no entendí bien tu mensaje. ¿Podrías reformularlo o hablar con recepción?",
+    "necesita_recepcionista": true
+  },
+  {
+    "fecha": "2025-05-03T13:50:39.554Z",
+    "mensaje_original": "hola",
+    "intencion_detectada": "precio",
+    "confianza": "0.40",
+    "sugerencia": "Dime qué tipo de habitación y fechas para darte el precio.",
+    "necesita_recepcionista": false
+  },
+  {
     "fecha": "2025-04-22T16:04:40.655Z",
     "mensaje_original": "quiero cancelar mi reserva",
     "intencion_detectada": "cancelacion",

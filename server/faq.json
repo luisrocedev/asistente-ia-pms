@@ -1,0 +1,50 @@
+[
+  {
+    "question": "¿A qué hora es el check-in?",
+    "answer": "El check-in comienza a las 15:00 horas. Si necesitas llegar antes, consúltanos por disponibilidad y tarifas adicionales."
+  },
+  {
+    "question": "¿A qué hora es el check-out?",
+    "answer": "El check-out estándar es hasta las 12:00 horas. Podemos ofrecer late check-out por un suplemento sujeto a disponibilidad."
+  },
+  {
+    "question": "¿Tienen desayuno incluido?",
+    "answer": "Sí, el desayuno buffet está incluido en la tarifa y se sirve de 7:00 a 10:30 en nuestro restaurante panorámico."
+  },
+  {
+    "question": "¿Cómo accedo al wifi?",
+    "answer": "El acceso al Wi-Fi es gratuito en todo el hotel. Conéctate a la red 'Hotel4Estrellas' e ingresa la habitación y tu apellido."
+  },
+  {
+    "question": "¿Tienen piscina y spa?",
+    "answer": "Contamos con piscina exterior climatizada, spa y gimnasio. El horario es de 8:00 a 20:00 para piscina y de 9:00 a 19:00 para spa."
+  },
+  {
+    "question": "¿Hay parking disponible?",
+    "answer": "Tenemos parking privado con coste adicional de 15€ por noche. También hay parking público gratuito a 200 metros."
+  },
+  {
+    "question": "¿Sirven comida a la habitación?",
+    "answer": "Sí, ofrecemos servicio de habitaciones 24 horas. Consulta nuestro menú en la carta digital de tu habitación."
+  },
+  {
+    "question": "¿Admiten mascotas?",
+    "answer": "Admitimos mascotas pequeñas (hasta 10 kg) con un coste de 30€ por estancia y previa notificación."
+  },
+  {
+    "question": "¿Tienen habitaciones para fumadores?",
+    "answer": "Somos un hotel 100% libre de humo. No disponemos de habitaciones para fumadores."
+  },
+  {
+    "question": "¿Ofrecen servicio de lavandería?",
+    "answer": "Sí, disponemos de servicio de lavandería express. El coste varía según el peso y el tipo de prenda."
+  },
+  {
+    "question": "¿Cuál es la política de cancelación?",
+    "answer": "La cancelación es gratuita hasta 48 horas antes de la llegada. Después, se cargará una noche de estancia."
+  },
+  {
+    "question": "¿Tienen restaurante en el hotel?",
+    "answer": "Nuestro restaurante gourmet está abierto de 13:00 a 15:30 y de 19:30 a 22:30. Se recomienda reservar con antelación."
+  }
+]

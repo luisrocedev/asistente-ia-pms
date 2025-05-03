@@ -37,17 +37,24 @@
     </table>
     <script>
       async function cargar() {
-        const res = await fetch("/stats");
-        const data = await res.json();
-        document.getElementById("total").innerHTML =
-          `<p>Total: ${data.total}</p>`;
+        const totalEl = document.getElementById("total");
         const tabla = document.getElementById("tabla");
-        tabla.innerHTML = "";
-        for (let key in data.stats) {
-          tabla.innerHTML += `<tr><td>${key}</td><td>${data.stats[key]}</td></tr>`;
+        totalEl.textContent = 'Cargando estadísticas...';
+        tabla.innerHTML = '';
+        try {
+          const res = await fetch("/stats");
+          if (!res.ok) throw new Error('Error al obtener estadísticas');
+          const data = await res.json();
+          totalEl.innerHTML = `<p>Total: ${data.total}</p>`;
+          for (let key in data.stats) {
+            tabla.innerHTML += `<tr><td>${key}</td><td>${data.stats[key]}</td></tr>`;
+          }
+        } catch (err) {
+          totalEl.textContent = '⚠️ No se pudieron cargar las estadísticas.';
+          console.error(err);
         }
       }
-      cargar();
+      window.addEventListener('load', cargar);
     </script>
   </body>
 </html>

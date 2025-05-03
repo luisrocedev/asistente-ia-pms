@@ -1,61 +1,77 @@
-# 🧠 Asistente IA PMS
+# Asistente IA Hotel 4 Estrellas
 
-Este es un microservicio de Inteligencia Artificial diseñado para integrarse en un software PMS (Personal Management System) y automatizar la detección de intenciones en mensajes de clientes de hotel.
+Asistente conversacional de IA para la gestión y atención al cliente en un hotel de 4 estrellas.
 
-## 📦 Estructura del Proyecto
+## 📦 Características
+
+- Chat interactivo con burbujas de usuario y bot.
+- Sugerencias de preguntas clickables para guiar la conversación.
+- Motor de respuesta propio basado en FAQs y distancia de Jaro-Winkler (sin servicios externos).
+- Entrenamiento sencillo: añadir preguntas en `server/faq.json` y ejemplos en `server/entrenamiento.json`.
+- Historial ligero en JSON (opcional).
+- Seguridad básica con Helmet (CSP) y logging con morgan/winston.
+
+## 🚀 Instalación y arranque
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone <URL-del-proyecto>
+   cd asistente-ia-pms
+   ```
+
+2. Instala dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Crea un archivo `.env` en la raíz (opcional) para personalizar el puerto:
+
+   ```ini
+   PORT=3000
+   ```
+
+4. En desarrollo, usa:
+
+   ```bash
+   npm run dev
+   ```
+
+   En producción:
+
+   ```bash
+   npm start
+   ```
+
+5. Abre tu navegador en `http://localhost:3000` para hablar con el asistente.
+
+## 🔧 Entrenamiento y personalización
+
+- **`server/faq.json`**: lista de `{ question, answer }` para tu negocio.
+- **`server/entrenamiento.json`**: ejemplos de frases agrupadas por intención y respuestas por defecto.
+- El servidor fusiona ambos archivos al arrancar y calcula similaridad Jaro-Winkler.
+- Ajusta el umbral de respuesta (0.7 por defecto) directamente en `server/ia.js` si lo deseas.
+
+## 📂 Estructura de carpetas
 
 ```
-asistente-ia-pms/
-├── public/
-│   ├── index.html       # Interfaz de prueba para analizar mensajes
-│   └── stats.html       # Visualizador de estadísticas
-├── server/
-│   ├── entrenamiento.json # Frases de entrenamiento por intención
-│   ├── historial.json      # Historial de conversaciones
-│   ├── ia.js               # Lógica de IA y entrenamiento
-│   └── index.js            # Servidor Express
-└── README.md
+server/      Código backend (Express + lógica IA)
+  ├─ faq.json
+  ├─ entrenamiento.json
+  ├─ ia.js
+  └─ index.js
+public/      UI y assets estáticos
+  ├─ index.html
+  ├─ stats.html
+  └─ js/
+      ├─ index.js
+      └─ stats.js
+README.md    Documentación principal
+aprendizaje.md  Notas de aprendizaje y tecnologías usadas
+guion.md     Guion para presentación en vídeo
 ```
 
-## 🚀 Cómo funciona
+## 📝 Licencia
 
-1. El cliente escribe un mensaje (por ejemplo: “quiero reservar una habitación”).
-2. El servidor lo analiza con `natural` (IA básica de Node.js).
-3. Devuelve la intención detectada, el nivel de confianza y una sugerencia.
-4. Si la IA no entiende bien, propone contactar con recepción.
-
-## 📊 Estadísticas
-
-Visita `/stats.html` para ver las intenciones más detectadas y el total de mensajes analizados.
-
-## ⚙️ Tecnologías
-
-- Node.js
-- Express
-- natural (NLP)
-- JSON para entrenamiento dinámico
-
-## 🧠 Entrenamiento Extensible
-
-Puedes añadir frases nuevas en `server/entrenamiento.json` para mejorar la detección.  
-Ejemplo:
-
-```json
-"reserva": [
-  "quiero reservar una habitación",
-  "me gustaría hacer una reserva"
-]
-```
-
-## 🔐 Futuras funcionalidades
-
-- Entrenamiento desde panel gráfico
-- Detectar tono emocional
-- Exportar historial
-- Integración con PMS real
-- Control multiusuario
-- Dashboard visual
-
-## 👨‍💻 Autor
-
-Luis Jahir Rodríguez Cedeño — [@luisrocedev](https://github.com/luisrocedev)
+Este proyecto está licenciado bajo MIT. Siéntete libre de adaptarlo a tus necesidades.

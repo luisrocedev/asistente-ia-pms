@@ -3,18 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Asistente IA PMS</title>
+    <title>Asistente IA Hotel 4 Estrellas</title>
     <style>
       body {
         font-family: sans-serif;
         max-width: 600px;
         margin: 2rem auto;
-      }
-      textarea {
-        width: 100%;
-        height: 100px;
-        margin-bottom: 1rem;
-        padding: 0.5rem;
       }
       button {
         padding: 0.6rem 1.2rem;
@@ -23,11 +17,6 @@
         border: none;
         cursor: pointer;
       }
-      pre {
-        background: #eee;
-        padding: 1rem;
-        white-space: pre-wrap;
-      }
       .alerta {
         display: none;
         background: #ffe6e6;
@@ -35,44 +24,65 @@
         border-left: 5px solid red;
         margin-top: 1rem;
       }
+      /* Chat container */
+      .chat {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        height: 400px;
+        overflow-y: auto;
+        padding: 1rem;
+        background: #f9f9f9;
+      }
+      .message {
+        display: flex;
+        margin-bottom: 0.5rem;
+      }
+      .message.user { justify-content: flex-end; }
+      .message.bot { justify-content: flex-start; }
+      .bubble {
+        max-width: 70%;
+        padding: 0.5rem 1rem;
+        border-radius: 16px;
+      }
+      .bubble.user { background: #007bff; color: white; border-bottom-right-radius: 4px; }
+      .bubble.bot { background: #e0e0e0; color: #333; border-bottom-left-radius: 4px; }
+      .input-area {
+        display: flex;
+        margin-top: 1rem;
+      }
+      .input-area input {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+      }
+      .input-area button {
+        border-radius: 0 4px 4px 0;
+      }
+      .sugerencias {
+        margin-top: 0.5rem;
+      }
+      .sugerencias button {
+        margin: 0.25rem;
+        padding: 0.4rem 0.8rem;
+        background: #28a745;
+        color: white;
+        border-radius: 4px;
+      }
+      .sugerencias button:hover {
+        background-color: #444;
+      }
     </style>
   </head>
   <body>
-    <h2>🧠 Asistente IA del Hotel</h2>
-    <p>Escribe el mensaje de un cliente:</p>
-    <textarea
-      id="mensaje"
-      placeholder="Ej: Quiero cancelar mi reserva para el sábado"
-    ></textarea>
-    <button onclick="analizar()">Analizar intención</button>
+    <h2>🧠 Asistente IA Hotel 4 Estrellas</h2>
+    <div id="chat" class="chat"></div>
+    <div class="input-area">
+      <input id="mensaje" type="text" placeholder="Escribe tu mensaje..." />
+      <button id="analizar-btn">Enviar</button>
+    </div>
+    <div id="sugerencias" class="sugerencias"></div>
 
-    <pre id="respuesta">Esperando análisis...</pre>
-    <div id="alerta" class="alerta"></div>
-
-    <script>
-      async function analizar() {
-        const mensaje = document.getElementById("mensaje").value;
-        const respuesta = document.getElementById("respuesta");
-        const alerta = document.getElementById("alerta");
-
-        const res = await fetch("/analizar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ mensaje }),
-        });
-
-        const data = await res.json();
-
-        respuesta.textContent = `🧠 Intención: ${data.intencion_detectada}\n📈 Confianza: ${data.confianza}\n💬 Sugerencia: ${data.sugerencia}`;
-
-        if (data.necesita_recepcionista) {
-          alerta.style.display = "block";
-          alerta.textContent =
-            "⚠️ El asistente no ha entendido completamente tu mensaje. Se recomienda reformularlo o contactar con recepción.";
-        } else {
-          alerta.style.display = "none";
-        }
-      }
-    </script>
+    <script src="/js/index.js"></script>
   </body>
 </html>
