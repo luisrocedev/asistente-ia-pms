@@ -1,117 +1,138 @@
-# Guía para Publicaciones de LinkedIn – Proyecto "asistente-ia-pms"
-
-Esta guía te ayudará a preparar y realizar publicaciones de LinkedIn sobre el proyecto, adaptadas a cada asignatura. Puedes copiar y completar los ejemplos durante el examen.
+# Guía de publicaciones LinkedIn para Asistente IA PMS (con ejemplos y marketing)
 
 ---
 
-## Lenguajes de Marcas
+## Lenguajes de Marcas y Sistemas de Gestión de Información
 
-🚀 **Presentando “asistente-ia-pms” – Lenguajes de Marcas**
+**Publicación:**
 
-Hoy os muestro la interfaz de nuestro asistente, desarrollada con HTML5 y CSS3 para asegurar compatibilidad y accesibilidad.
+🤖 La interfaz de Asistente IA PMS está desarrollada en HTML5, CSS3 y JavaScript, permitiendo una interacción natural con el usuario y visualización de respuestas inteligentes.
 
-Ejemplo de código:
+**Ejemplo de código (HTML de chat):**
 
-**<**form\*\* **id**=**"formulario"**>\*\*
+```html
+<div id="chat">
+  <div id="mensajes"></div>
+  <input type="text" id="inputMensaje" placeholder="Escribe tu pregunta..." />
+  <button id="enviar">Enviar</button>
+</div>
+```
 
-** <**input\*\* **type**=**"text"** **id**=**"mensaje"** **placeholder**=**"Escribe tu pregunta..."** />\*\*
+#HTML #CSS #JavaScript #AI
 
-** <**button\*\* **type**=**"submit"**>Enviar</**button**>\*\*
-
-**</**form**>**
-
-[Sube aquí una captura de la interfaz web]
-
----
-
-## Sistemas Informáticos
-
-🔒 **Seguridad y rendimiento en “asistente-ia-pms” – Sistemas Informáticos**
-
-El backend está construido con Node.js y Express, aplicando medidas de seguridad como Helmet y registro de logs con Morgan.
-
-Ejemplo de código:
-
-**app**.**use**(**helmet**(**)**)**;**
-
-**app**.**use**(**morgan**(**"combined"**)**)**;
-
-[Incluye aquí un diagrama de arquitectura o consola mostrando logs]
-
----
-
-## Base de Datos
-
-📊 **Gestión de datos en “asistente-ia-pms” – Base de Datos**
-
-El historial de preguntas y respuestas se almacena en archivos JSON, facilitando la gestión y consulta de la información.
-
-Ejemplo de código:
-
-**const** **raw** **=** **await** **fsp**.**readFile**(**ruta**, **"utf-8"**)**;**
-
-**const** **hist** **=** **JSON**.**parse**(**raw**)**;**
-
-[Adjunta aquí un fragmento de historial.json]
-
----
-
-## Entornos de Desarrollo
-
-⚙️ **Desarrollo ágil con npm – Entornos de Desarrollo**
-
-Utilizamos npm para gestionar dependencias y scripts, lo que facilita la instalación y despliegue del proyecto.
-
-Ejemplo de script en package.json:
-
-**"scripts"**: **{**
-
-\*\* **"start"**: \*\*"node server/index.js"
-
-**}**
-
-[Incluye una captura de la terminal ejecutando npm start]
+**Imagen/vídeo sugerido:**  
+Captura del chat en funcionamiento o vídeo de una conversación.
 
 ---
 
 ## Programación
 
-💻 **Lógica y algoritmia en “asistente-ia-pms” – Programación**
+**Publicación:**
 
-La lógica del asistente se desarrolla en JavaScript, aplicando estructuras de control, funciones y manejo de eventos para procesar las preguntas y generar respuestas.
+🧠 El backend de Asistente IA PMS está desarrollado en Node.js, gestionando el procesamiento de lenguaje natural y la lógica de respuestas mediante módulos independientes.
 
-Ejemplo de código:
+**Ejemplo de código (respuesta de IA en Node.js):**
 
-**function** **responderPregunta**(**mensaje**)\*\* \*\*{
+```js
+// server/ia.js
+function responder(pregunta) {
+  if (pregunta.includes("reserva"))
+    return "¿Sobre qué reserva necesitas ayuda?";
+  return "¡Estoy aquí para ayudarte!";
+}
+```
 
-\*\* \*\*// Analiza el mensaje y devuelve una respuesta
+#NodeJS #AI #Backend
 
-\*\* **if** **(**mensaje**.**includes**(**'hola'**)**)\*\* **{**
+**Imagen/vídeo sugerido:**  
+Fragmento de código de la IA o consola mostrando respuestas.
 
-\*\* **return** **'¡Hola! ¿En qué puedo ayudarte?'**;\*\*
+---
 
-\*\* \*\*}
+## Base de Datos
 
-\*\* \*\*// ...más lógica...
+**Publicación:**
 
-**}**
+🗄️ Asistente IA PMS almacena el historial de conversaciones y FAQs en archivos JSON, permitiendo un acceso rápido y flexible a la información.
 
-[Incluye aquí un diagrama de flujo o fragmento de la lógica de IA]
+**Ejemplo de código (estructura JSON):**
+
+```json
+{
+  "faq": [
+    {
+      "pregunta": "¿Cómo hago una reserva?",
+      "respuesta": "Desde el panel de reservas..."
+    }
+  ]
+}
+```
+
+#JSON #Data
+
+**Imagen/vídeo sugerido:**  
+Captura del archivo JSON o panel de administración de FAQs.
+
+---
+
+## Sistemas Informáticos
+
+**Publicación:**
+
+🖥️ Asistente IA PMS puede ejecutarse en cualquier sistema con Node.js, facilitando la integración en diferentes entornos y la escalabilidad del servicio.
+
+**Ejemplo de código (script de inicio):**
+
+```bash
+node server/index.js
+```
+
+#SysAdmin #NodeJS
+
+**Imagen/vídeo sugerido:**  
+Captura de terminal ejecutando el servidor o panel de configuración.
+
+---
+
+## Entornos de Desarrollo
+
+**Publicación:**
+
+⚙️ El desarrollo se realiza en VS Code y GitHub, con npm para la gestión de dependencias y scripts de automatización.
+
+**Ejemplo de código (extracto de package.json):**
+
+```json
+{
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  }
+}
+```
+
+#VSCode #GitHub #npm
+
+**Imagen/vídeo sugerido:**  
+Captura de VS Code con el proyecto abierto y el panel de scripts.
 
 ---
 
 ## Proyecto Intermodular
 
-🤖 **Integración total: “asistente-ia-pms” – Proyecto Intermodular**
+**Publicación:**
 
-Este proyecto une conocimientos de todas las asignaturas, desde la interfaz hasta la lógica de IA.
+🌟 Asistente IA PMS es un proyecto intermodular que integra inteligencia artificial y gestión hotelera, mejorando la atención al cliente y la eficiencia operativa.
 
-Ejemplo de función:
+**Ejemplo de flujo de trabajo:**
 
-**function** **responderPregunta**(**mensaje**)\*\* \*\*{
+```plaintext
+Usuario pregunta → Procesamiento IA → Respuesta → Historial
+```
 
-\*\* \*\*// Lógica de IA para analizar y responder
+#AI #FullStack #Innovación
 
-**}**
+**Imagen/vídeo sugerido:**  
+Vídeo mostrando una conversación completa con el asistente.
 
-[Sube un gif o imagen del asistente respondiendo en tiempo real]
+---
